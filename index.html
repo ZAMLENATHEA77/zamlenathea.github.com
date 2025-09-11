@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Siswa RPL - l</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#3b82f6',
+                        accent: '#60a5fa',
+                        dark: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body 
+  -- Konten lain di sini -->
+  <form onsubmit="sendMessage(event)">
+    <input name="nama" required>
+    <input name="email" required>
+    <input name="subjek" required>
+    <textarea name="pesan" required></textarea>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <!-- ✅ Taruh script-nya di bawah sini -->
+  <script>
+    function sendMessage(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const data = {
+        nama: form.nama.value,
+        email: form.email.value,
+        subjek: form.subjek.value,
+        pesan: form.pesan.value,
+      };
+
+      const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        alert('Pesan berhasil dikirim!');
+        form.reset();
+      })
+      .catch(() => {
+        alert('Gagal mengirim pesan.');
+      });
+    }
+  </script>   
+    
+  </body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
+                        💻
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold text-primary" id="navName">Muhammad Azzam Arvanda Saputra</div>
+                        <div class="text-xs text-gray-600">Siswa RPL SMK</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition font-medium">Beranda</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition font-medium">Tentang Saya</a>
+                    <a href="#projects" class="text-gray-700 hover:text-primary transition font-medium">Proyek</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-primary transition font-medium">Testimoni</a>
+                    <a href="#blog" class="text-gray-700 hover:text-primary transition font-medium">Blog</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition font-medium">Kontak</a>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="toggleAdmin()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
+                        ⚙️ Admin
+                    </button>
+                    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition text-sm">
+                        🚪 Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-primary">🎛️ Panel Admin - Edit Profil</h2>
+                    <button onclick="toggleAdmin()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        ✕
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Personal Info -->
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <h3 class="text-lg font-semibold mb-4 text-primary">📝 Info Personal</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                <input type="text" id="adminName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="Muhammad Azzam Arvanda Saputra">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelas</label>
+                                <input type="text" id="adminClass" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="RPL 1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">NIS</label>
+                                <input type="text" id="adminNis" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="2021001">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="adminEmail" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="zamspride17gmail.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Bio Singkat</label>
+                                <textarea id="adminBio" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills & Achievements -->
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <h3 class="text-lg font-semibold mb-4 text-primary">🏆 Skills & Prestasi</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Skills (pisahkan dengan koma)</label>
+                                <textarea id="adminSkills" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Prestasi</label>
+                                <textarea id="adminAchievements" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023
+🥈 Juara 2 Hackathon SMK Se-Jawa Barat 2023
+🏅 Sertifikat Junior Web Developer
+📜 Sertifikat Database Management</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projects -->
+                    <div class="bg-gray-50 rounded-xl p-4">
+                        <h3 class="text-lg font-semibold mb-4 text-primary">💼 Proyek</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Daftar Proyek (format: Nama|Deskripsi|Tech)</label>
+                                <textarea id="adminProjects" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap
+Task Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB
+School Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery
+Portfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button onclick="resetData()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition">
+                        🔄 Reset
+                    </button>
+                    <button onclick="saveChanges()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/80 transition">
+                        💾 Simpan Perubahan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                        <span class="text-sm font-medium">👋 Halo, Saya</span>
+                    </div>
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6" id="heroName">Muhammad Azzam Arvanda Saputra</h1>
+                    <p class="text-xl mb-4 opacity-90">Siswa <span id="heroClass">XII RPL 3</span> - SMK Krian 1</p>
+                    <p class="text-lg mb-8 opacity-80" id="heroBio">Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="scrollToSection('projects')" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+                            🚀 Lihat Proyek
+                        </button>
+                        <button onclick="scrollToSection('contact')" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition">
+                            📞 Hubungi Saya
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative">
+                      <div class="w-80 h-80 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+  <img src="profil.jpeg" alt="Foto Profil" class="w-full h-full object-cover">
+</div>
+
+                        </div>
+                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-accent rounded-full flex items-center justify-center text-2xl animate-bounce">
+                            💡
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-xl animate-pulse">
+                            🎯
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-dark mb-4">🎓 Tentang Saya</h2>
+                <p class="text-xl text-gray-600">Mengenal lebih dekat profil dan kemampuan saya</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Profile Card -->
+                <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 text-white card-hover">
+                    <div class="text-6xl mb-4">📋</div>
+                    <h3 class="text-2xl font-bold mb-4">Data Diri</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="opacity-80">Nama:</span>
+                            <span class="font-semibold" id="aboutName">Muhammad Azzam Arvanda Saputra</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="opacity-80">Kelas:</span>
+                            <span class="font-semibold" id="aboutClass">XII RPL 3</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="opacity-80">NIS:</span>
+                            <span class="font-semibold" id="aboutNis">2021001</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="opacity-80">Email:</span>
+                            <span class="font-semibold" id="aboutEmail">zamspride17@gmail.com
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Card -->
+                <div class="bg-white rounded-2xl p-8 shadow-xl card-hover border border-gray-100">
+                    <div class="text-6xl mb-4">🛠️</div>
+                    <h3 class="text-2xl font-bold text-dark mb-4">Keahlian</h3>
+                    <div class="flex flex-wrap gap-2" id="skillsList">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">HTML</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">CSS</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">PHP</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Laravel</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">React</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Node.js</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Git</span>
+                    </div>
+                </div>
+
+                <!-- Achievements Card -->
+                <div class="bg-gradient-to-br from-accent to-secondary rounded-2xl p-8 text-white card-hover">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h3 class="text-2xl font-bold mb-4">Prestasi</h3>
+                    <div class="space-y-3" id="achievementsList">
+                        <div class="flex items-start space-x-2">
+                            <span>🥇</span>
+                            <span class="text-sm">Juara 1 Lomba Web Design Tingkat Provinsi 2023</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span>🥈</span>
+                            <span class="text-sm">Juara 2 Hackathon SMK Se-Jawa Timur 2023</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span>🏅</span>
+                            <span class="text-sm">Sertifikat Junior Web Developer</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span>📜</span>
+                            <span class="text-sm">Sertifikat Database Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-dark mb-4">💼 Proyek Saya</h2>
+                <p class="text-xl text-gray-600">Beberapa proyek yang telah saya kerjakan</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8" id="projectsList">
+                <!-- Projects will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-dark mb-4">💬 Testimoni</h2>
+                <p class="text-xl text-gray-600">Apa kata guru dan teman-teman tentang saya</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-xl">
+                            👨‍🏫
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-semibold text-dark">Pak Budi Santoso</div>
+                            <div class="text-sm text-gray-600">Guru RPL</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Azzam adalah siswa yang sangat tekun dan kreatif. Kemampuan coding-nya sangat baik dan selalu membantu teman-temannya."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white text-xl">
+                            👩‍💼
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-semibold text-dark">Bu Sari Dewi</div>
+                            <div class="text-sm text-gray-600">Wali Kelas</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Siswa yang bertanggung jawab dan memiliki leadership yang baik. Sering memimpin proyek kelompok dengan hasil yang memuaskan."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white text-xl">
+                            👨‍🎓
+                        </div>
+                        <div class="ml-3">
+                            <div class="font-semibold text-dark">Rian Pratama</div>
+                            <div class="text-sm text-gray-600">Teman Sekelas</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Azzam orangnya baik dan suka berbagi ilmu. Kalau ada yang kesulitan coding, dia selalu siap membantu dengan sabar."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-dark mb-4">📝 Blog & Artikel</h2>
+                <p class="text-xl text-gray-600">Berbagi pengalaman dan tips seputar programming</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('html-css-tips')">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
+                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="code-pattern" patternUnits="userSpaceOnUse" width="40" height="40">
+                                    <rect width="40" height="40" fill="#1e40af"/>
+                                    <text x="5" y="15" fill="#60a5fa" font-family="monospace" font-size="8">&lt;/&gt;</text>
+                                    <text x="5" y="30" fill="#3b82f6" font-family="monospace" font-size="6">CSS</text>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#code-pattern)" opacity="0.3"/>
+                            <circle cx="100" cy="60" r="30" fill="#ffffff" opacity="0.2"/>
+                            <circle cx="300" cy="140" r="40" fill="#ffffff" opacity="0.1"/>
+                            <text x="200" y="110" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">HTML & CSS</text>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">15 November 2023</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Tips Belajar HTML & CSS untuk Pemula</h3>
+                        <p class="text-gray-600 mb-4">Panduan lengkap untuk memulai belajar web development dari dasar. Cocok untuk siswa yang baru mulai belajar coding.</p>
+                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('programming-contest')">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-blue-600 relative overflow-hidden">
+                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="url(#trophy-bg)"/>
+                            <defs>
+                                <pattern id="trophy-bg" patternUnits="userSpaceOnUse" width="50" height="50">
+                                    <rect width="50" height="50" fill="#059669"/>
+                                    <circle cx="25" cy="25" r="3" fill="#34d399" opacity="0.5"/>
+                                </pattern>
+                            </defs>
+                            <polygon points="200,50 220,90 260,90 230,115 240,155 200,130 160,155 170,115 140,90 180,90" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="200" y="180" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">PROGRAMMING CONTEST</text>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">10 November 2023</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Pengalaman Ikut Lomba Programming</h3>
+                        <p class="text-gray-600 mb-4">Cerita seru dan tips sukses mengikuti kompetisi programming tingkat provinsi. Pelajaran berharga yang bisa dibagi.</p>
+                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+
+                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('javascript-frameworks')">
+                    <div class="h-48 bg-gradient-to-br from-yellow-500 to-red-600 relative overflow-hidden">
+                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100%" height="100%" fill="#f59e0b"/>
+                            <circle cx="120" cy="80" r="25" fill="#3b82f6" opacity="0.8"/>
+                            <text x="120" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">React</text>
+                            <circle cx="200" cy="80" r="25" fill="#10b981" opacity="0.8"/>
+                            <text x="200" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Vue</text>
+                            <circle cx="280" cy="80" r="25" fill="#ef4444" opacity="0.8"/>
+                            <text x="280" y="87" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Angular</text>
+                            <text x="200" y="140" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">JS Frameworks</text>
+                            <path d="M50,160 Q200,120 350,160" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">5 November 2023</div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Framework JavaScript yang Wajib Dipelajari</h3>
+                        <p class="text-gray-600 mb-4">Review singkat tentang React, Vue, dan Angular. Mana yang cocok untuk pemula dan bagaimana cara memulainya.</p>
+                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-dark mb-4">📞 Hubungi Saya</h2>
+                <p class="text-xl text-gray-600">Mari berkolaborasi atau sekadar ngobrol tentang teknologi</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-dark mb-6">💬 Mari Terhubung</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-xl">
+                                📧
+                            </div>
+                            <div>
+                                <div class="font-semibold text-dark">Email</div>
+                                <div class="text-gray-600" id="contactEmail">azzam@smkdigital.sch.id</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white text-xl">
+                                📱
+                            </div>
+                            <div>
+                                <div class="font-semibold text-dark">WhatsApp</div>
+                                <div class="text-gray-600">+62 813-3630-6181</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
+                            <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white text-xl">
+                                📷
+                            </div>
+                            <div>
+                                <div class="font-semibold text-dark">Instagram</div>
+                                <div class="text-gray-600">@4zzam
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-dark mb-6">✉️ Kirim Pesan</h3>
+                    <form class="space-y-4" onsubmit="sendMessage(event)">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan email Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subjek</label>
+                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Subjek pesan">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pesan</label>
+                            <textarea rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Tulis pesan Anda di sini..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/80 transition">
+                            🚀 Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Post Modal -->
+    <div id="blogModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-3xl font-bold text-primary" id="blogTitle">Judul Artikel</h2>
+                    <button onclick="closeBlogPost()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                        ✕
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="text-sm text-gray-500 mb-4" id="blogDate">Tanggal</div>
+                    <div class="h-64 rounded-xl overflow-hidden mb-6" id="blogImage">
+                        <!-- Blog image will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="prose max-w-none" id="blogContent">
+                    <!-- Blog content will be inserted here -->
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-80 h-80 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+  <img src="profil.jpeg" alt="Foto Profil" class="w-full h-full object-cover">
+</div>
+
+                            </div>
+                            <div>
+                                <div class="font-semibold text-dark">Muhammad Azzam Arvanda Saputra</div>
+                                <div class="text-sm text-gray-600">Siswa RPL SMK Krian 1</div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="shareBlog()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
+                                📤 Bagikan
+                            </button>
+                            <button onclick="likeBlog()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition text-sm">
+                                ❤️ Suka
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
+                            💻
+                        </div>
+                        <div>
+                            <div class="text-xl font-bold" id="footerName">Muhammad Azzam Arvanda Saputra</div>
+                            <div class="text-sm text-gray-400">Siswa RPL SMK</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Passionate dalam pengembangan web dan mobile app. Mari berkolaborasi untuk menciptakan solusi teknologi yang inovatif.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">🔗 Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block text-gray-400 hover:text-white transition">Beranda</a>
+                        <a href="#about" class="block text-gray-400 hover:text-white transition">Tentang Saya</a>
+                        <a href="#projects" class="block text-gray-400 hover:text-white transition">Proyek</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-white transition">Kontak</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">📧 Kontak</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-400">Email: zamspride17@gmail.com
+                        <p class="text-gray-400">WhatsApp: +62 813-3630-6181</p>
+                        <p class="text-gray-400">Instagram: @azzamarvanda</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Muhammad Azzam Arvanda Saputra. Dibuat dengan ❤️ untuk pembelajaran.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data storage
+        let profileData = {
+            name: "Muhammad Azzam Arvanda Saputra",
+            class: "XII RPL 3",
+            nis: "2021001",
+            email: "zamspride17@gmail.com",
+            bio: "Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.",
+            skills: "HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git",
+            achievements: "🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023\n🥈 Juara 2 Hackathon SMK Se-Jawa Barat 2023\n🏅 Sertifikat Junior Web Developer\n📜 Sertifikat Database Management",
+            projects: "E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap\nTask Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB\nSchool Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery\nPortfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript"
+        };
+
+        // Initialize page
+        function initializePage() {
+            updateAllElements();
+            renderProjects();
+        }
+
+        // Update all elements with current data
+        function updateAllElements() {
+            // Update name in multiple places
+            document.getElementById('navName').textContent = profileData.name;
+            document.getElementById('heroName').textContent = profileData.name;
+            document.getElementById('aboutName').textContent = profileData.name;
+            document.getElementById('footerName').textContent = profileData.name;
+
+            // Update class
+            document.getElementById('heroClass').textContent = profileData.class;
+            document.getElementById('aboutClass').textContent = profileData.class;
+
+            // Update other info
+            document.getElementById('aboutNis').textContent = profileData.nis;
+            document.getElementById('aboutEmail').textContent = profileData.email;
+            document.getElementById('contactEmail').textContent = profileData.email;
+            document.getElementById('heroBio').textContent = profileData.bio;
+
+            // Update admin form
+            document.getElementById('adminName').value = profileData.name;
+            document.getElementById('adminClass').value = profileData.class;
+            document.getElementById('adminNis').value = profileData.nis;
+            document.getElementById('adminEmail').value = profileData.email;
+            document.getElementById('adminBio').value = profileData.bio;
+            document.getElementById('adminSkills').value = profileData.skills;
+            document.getElementById('adminAchievements').value = profileData.achievements;
+            document.getElementById('adminProjects').value = profileData.projects;
+
+            // Update skills
+            updateSkills();
+            updateAchievements();
+        }
+
+        // Update skills display
+        function updateSkills() {
+            const skillsList = document.getElementById('skillsList');
+            const skills = profileData.skills.split(',').map(skill => skill.trim());
+            
+            skillsList.innerHTML = skills.map(skill => 
+                `<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">${skill}</span>`
+            ).join('');
+        }
+
+        // Update achievements display
+        function updateAchievements() {
+            const achievementsList = document.getElementById('achievementsList');
+            const achievements = profileData.achievements.split('\n').filter(achievement => achievement.trim());
+            
+            achievementsList.innerHTML = achievements.map(achievement => {
+                const parts = achievement.split(' ');
+                const emoji = parts[0];
+                const text = parts.slice(1).join(' ');
+                return `<div class="flex items-start space-x-2">
+                    <span>${emoji}</span>
+                    <span class="text-sm">${text}</span>
+                </div>`;
+            }).join('');
+        }
+
+        // Render projects
+        function renderProjects() {
+            const projectsList = document.getElementById('projectsList');
+            const projects = profileData.projects.split('\n').filter(project => project.trim());
+            
+            const projectIcons = ['🛒', '📋', '📚', '🌐'];
+            const projectColors = ['from-primary to-secondary', 'from-secondary to-accent', 'from-accent to-primary', 'from-primary to-accent'];
+            
+            projectsList.innerHTML = projects.map((project, index) => {
+                const [name, description, tech] = project.split('|');
+                const icon = projectIcons[index % projectIcons.length];
+                const color = projectColors[index % projectColors.length];
+                
+                return `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover">
+                        <div class="h-48 bg-gradient-to-br ${color} flex items-center justify-center text-6xl text-white">
+                            ${icon}
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark mb-3">${name}</h3>
+                            <p class="text-gray-600 mb-4">${description}</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                ${tech.split(',').map(t => `<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">${t.trim()}</span>`).join('')}
+                            </div>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
+                                👁️ Lihat Detail
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Admin functions
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        function saveChanges() {
+            // Get values from admin form
+            profileData.name = document.getElementById('adminName').value;
+            profileData.class = document.getElementById('adminClass').value;
+            profileData.nis = document.getElementById('adminNis').value;
+            profileData.email = document.getElementById('adminEmail').value;
+            profileData.bio = document.getElementById('adminBio').value;
+            profileData.skills = document.getElementById('adminSkills').value;
+            profileData.achievements = document.getElementById('adminAchievements').value;
+            profileData.projects = document.getElementById('adminProjects').value;
+
+            // Update all elements
+            updateAllElements();
+            renderProjects();
+
+            // Show success message
+            alert('✅ Perubahan berhasil disimpan!');
+            toggleAdmin();
+        }
+
+        function resetData() {
+            if (confirm('🔄 Yakin ingin mereset semua data ke default?')) {
+                profileData = {
+                    name: "Muhammad Azzam Arvanda Saputra",
+                    class: "XII RPL 3",
+                    nis: "2021001",
+                    email: "zamspride17@gmail.com",
+                    bio: "Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.",
+                    skills: "HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git",
+                    achievements: "🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023\n🥈 Juara 2 Hackathon SMK Se-Jawa Timur 2023\n🏅 Sertifikat Junior Web Developer\n📜 Sertifikat Database Management",
+                    projects: "E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap\nTask Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB\nSchool Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery\nPortfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript"
+                };
+                updateAllElements();
+                renderProjects();
+                alert('🔄 Data berhasil direset!');
+            }
+        }
+
+        function logout() {
+            if (confirm('🚪 Yakin ingin logout?')) {
+                alert('👋 Terima kasih telah mengunjungi profil saya!');
+                // In a real app, this would redirect to login page
+                window.location.reload();
+            }
+        }
+
+        // Utility functions
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            alert('📧 Pesan berhasil dikirim! Terima kasih atas pesan Anda.');
+            event.target.reset();
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Blog data
+        const blogPosts = {
+            'html-css-tips': {
+                title: 'Tips Belajar HTML & CSS untuk Pemula',
+                date: '15 November 2023',
+                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="code-pattern-full" patternUnits="userSpaceOnUse" width="40" height="40">
+                            <rect width="40" height="40" fill="#1e40af"/>
+                            <text x="5" y="15" fill="#60a5fa" font-family="monospace" font-size="8">&lt;/&gt;</text>
+                            <text x="5" y="30" fill="#3b82f6" font-family="monospace" font-size="6">CSS</text>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#code-pattern-full)" opacity="0.3"/>
+                    <circle cx="100" cy="60" r="30" fill="#ffffff" opacity="0.2"/>
+                    <circle cx="300" cy="140" r="40" fill="#ffffff" opacity="0.1"/>
+                    <text x="200" y="110" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">HTML & CSS</text>
+                </svg>`,
+                content: `
+                    <h3 class="text-2xl font-bold mb-4">🚀 Memulai Perjalanan Web Development</h3>
+                    <p class="mb-4">Sebagai siswa RPL, belajar HTML dan CSS adalah langkah pertama yang sangat penting dalam dunia web development. Berikut adalah tips-tips yang saya pelajari selama belajar:</p>
+                    
+                    <h4 class="text-xl font-semibold mb-3 mt-6">📝 1. Mulai dengan HTML Dasar</h4>
+                    <p class="mb-4">HTML adalah fondasi dari semua website. Pelajari struktur dasar seperti:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Tag-tag dasar: &lt;html&gt;, &lt;head&gt;, &lt;body&gt;</li>
+                        <li>Heading: &lt;h1&gt; sampai &lt;h6&gt;</li>
+                        <li>Paragraf dan teks: &lt;p&gt;, &lt;span&gt;, &lt;div&gt;</li>
+                        <li>Link dan gambar: &lt;a&gt;, &lt;img&gt;</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">🎨 2. Belajar CSS Secara Bertahap</h4>
+                    <p class="mb-4">CSS membuat website menjadi cantik. Mulai dengan:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Selector dasar: element, class, dan id</li>
+                        <li>Properties penting: color, background, font-size</li>
+                        <li>Box model: margin, padding, border</li>
+                        <li>Layout: flexbox dan grid</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">💡 3. Tips Praktis dari Pengalaman</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Praktik setiap hari, meski hanya 30 menit</li>
+                        <li>Buat proyek kecil seperti landing page sederhana</li>
+                        <li>Gunakan developer tools di browser untuk debugging</li>
+                        <li>Jangan takut bereksperimen dengan kode</li>
+                        <li>Bergabung dengan komunitas developer untuk belajar bersama</li>
+                    </ul>
+
+                    <div class="bg-blue-50 p-4 rounded-lg mt-6">
+                        <p class="text-blue-800"><strong>💪 Motivasi:</strong> Ingat, setiap expert pernah menjadi pemula. Yang penting adalah konsistensi dan tidak menyerah saat menghadapi error!</p>
+                    </div>
+                `
+            },
+            'programming-contest': {
+                title: 'Pengalaman Ikut Lomba Programming',
+                date: '10 November 2023',
+                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="url(#trophy-bg-full)"/>
+                    <defs>
+                        <pattern id="trophy-bg-full" patternUnits="userSpaceOnUse" width="50" height="50">
+                            <rect width="50" height="50" fill="#059669"/>
+                            <circle cx="25" cy="25" r="3" fill="#34d399" opacity="0.5"/>
+                        </pattern>
+                    </defs>
+                    <polygon points="200,50 220,90 260,90 230,115 240,155 200,130 160,155 170,115 140,90 180,90" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+                    <text x="200" y="180" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">PROGRAMMING CONTEST</text>
+                </svg>`,
+                content: `
+                    <h3 class="text-2xl font-bold mb-4">🏆 Perjalanan Menuju Juara Provinsi</h3>
+                    <p class="mb-4">Alhamdulillah, tahun ini saya berhasil meraih juara 1 lomba Web Design tingkat provinsi. Ini adalah pengalaman yang sangat berharga dan ingin saya bagikan kepada teman-teman.</p>
+                    
+                    <h4 class="text-xl font-semibold mb-3 mt-6">📚 Persiapan Sebelum Lomba</h4>
+                    <p class="mb-4">Persiapan adalah kunci sukses. Berikut yang saya lakukan:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Belajar intensif selama 3 bulan sebelum lomba</li>
+                        <li>Mengerjakan soal-soal tahun sebelumnya</li>
+                        <li>Berlatih dengan time pressure</li>
+                        <li>Mempelajari framework dan library terbaru</li>
+                        <li>Diskusi dengan guru dan senior yang berpengalaman</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">⚡ Hari H Lomba</h4>
+                    <p class="mb-4">Hari lomba adalah momen yang menegangkan tapi seru:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Bangun pagi dan sarapan yang cukup</li>
+                        <li>Baca soal dengan teliti dan buat planning</li>
+                        <li>Mulai dengan fitur yang paling penting dulu</li>
+                        <li>Jangan panik saat ada error, debug dengan tenang</li>
+                        <li>Manfaatkan waktu dengan efisien</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">🎯 Tantangan yang Dihadapi</h4>
+                    <p class="mb-4">Tidak semua berjalan mulus. Ada beberapa tantangan:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Waktu yang terbatas (hanya 4 jam)</li>
+                        <li>Soal yang lebih kompleks dari latihan</li>
+                        <li>Tekanan dari peserta lain yang terlihat lebih cepat</li>
+                        <li>Bug yang muncul di menit-menit terakhir</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">🌟 Pelajaran Berharga</h4>
+                    <p class="mb-4">Yang saya pelajari dari pengalaman ini:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Persiapan yang matang sangat penting</li>
+                        <li>Tetap tenang dan fokus saat lomba</li>
+                        <li>Jangan membandingkan progress dengan peserta lain</li>
+                        <li>Kualitas code lebih penting dari kecepatan</li>
+                        <li>Networking dengan peserta lain juga berharga</li>
+                    </ul>
+
+                    <div class="bg-green-50 p-4 rounded-lg mt-6">
+                        <p class="text-green-800"><strong>🚀 Tips untuk Adik-adik:</strong> Jangan takut untuk ikut lomba! Bahkan jika tidak menang, pengalaman yang didapat sangat berharga untuk pengembangan skill dan mental.</p>
+                    </div>
+                `
+            },
+            'javascript-frameworks': {
+                title: 'Framework JavaScript yang Wajib Dipelajari',
+                date: '5 November 2023',
+                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100%" height="100%" fill="#f59e0b"/>
+                    <circle cx="120" cy="80" r="25" fill="#3b82f6" opacity="0.8"/>
+                    <text x="120" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">React</text>
+                    <circle cx="200" cy="80" r="25" fill="#10b981" opacity="0.8"/>
+                    <text x="200" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Vue</text>
+                    <circle cx="280" cy="80" r="25" fill="#ef4444" opacity="0.8"/>
+                    <text x="280" y="87" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Angular</text>
+                    <text x="200" y="140" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">JS Frameworks</text>
+                    <path d="M50,160 Q200,120 350,160" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
+                </svg>`,
+                content: `
+                    <h3 class="text-2xl font-bold mb-4">⚡ Era Framework JavaScript Modern</h3>
+                    <p class="mb-4">Sebagai siswa RPL, memahami framework JavaScript adalah skill yang sangat penting di era modern ini. Mari kita bahas tiga framework utama yang wajib dipelajari.</p>
+                    
+                    <h4 class="text-xl font-semibold mb-3 mt-6 text-blue-600">⚛️ React - The Popular Choice</h4>
+                    <p class="mb-4">React adalah library yang dikembangkan oleh Facebook dan sangat populer di industri:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li><strong>Kelebihan:</strong> Component-based, virtual DOM, ecosystem yang besar</li>
+                        <li><strong>Cocok untuk:</strong> Aplikasi web kompleks, SPA (Single Page Application)</li>
+                        <li><strong>Learning curve:</strong> Moderate, butuh pemahaman JSX</li>
+                        <li><strong>Job market:</strong> Sangat tinggi, banyak perusahaan menggunakan</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6 text-green-600">🟢 Vue.js - The Progressive Framework</h4>
+                    <p class="mb-4">Vue.js dikenal sebagai framework yang mudah dipelajari:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li><strong>Kelebihan:</strong> Mudah dipelajari, dokumentasi excellent, flexible</li>
+                        <li><strong>Cocok untuk:</strong> Pemula, project kecil hingga besar</li>
+                        <li><strong>Learning curve:</strong> Easy, syntax mirip HTML biasa</li>
+                        <li><strong>Job market:</strong> Growing, terutama di Asia</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6 text-red-600">🅰️ Angular - The Full Framework</h4>
+                    <p class="mb-4">Angular adalah full framework yang dikembangkan oleh Google:</p>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li><strong>Kelebihan:</strong> Full-featured, TypeScript built-in, enterprise-ready</li>
+                        <li><strong>Cocok untuk:</strong> Aplikasi enterprise, project besar</li>
+                        <li><strong>Learning curve:</strong> Steep, butuh pemahaman TypeScript</li>
+                        <li><strong>Job market:</strong> Tinggi di perusahaan besar</li>
+                    </ul>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">🎯 Rekomendasi untuk Pemula</h4>
+                    <p class="mb-4">Berdasarkan pengalaman saya belajar ketiga framework ini:</p>
+                    <ol class="list-decimal list-inside mb-4 space-y-2">
+                        <li><strong>Mulai dengan Vue.js</strong> - Paling mudah dipelajari dan dipahami</li>
+                        <li><strong>Lanjut ke React</strong> - Setelah nyaman dengan konsep component</li>
+                        <li><strong>Eksplorasi Angular</strong> - Jika ingin fokus ke enterprise development</li>
+                    </ol>
+
+                    <h4 class="text-xl font-semibold mb-3 mt-6">📚 Tips Belajar Framework</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-2">
+                        <li>Pastikan sudah menguasai JavaScript vanilla dulu</li>
+                        <li>Buat project kecil untuk setiap framework</li>
+                        <li>Ikuti tutorial official documentation</li>
+                        <li>Join komunitas developer untuk diskusi</li>
+                        <li>Praktik dengan membuat clone aplikasi populer</li>
+                    </ul>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg mt-6">
+                        <p class="text-yellow-800"><strong>💡 Pro Tip:</strong> Jangan terburu-buru ingin menguasai semua framework sekaligus. Fokus pada satu framework, kuasai dengan baik, baru pindah ke yang lain!</p>
+                    </div>
+                `
+            }
+        };
+
+        // Blog functions
+        function openBlogPost(postId) {
+            const post = blogPosts[postId];
+            if (!post) return;
+
+            document.getElementById('blogTitle').textContent = post.title;
+            document.getElementById('blogDate').textContent = post.date;
+            document.getElementById('blogImage').innerHTML = post.image;
+            document.getElementById('blogContent').innerHTML = post.content;
+            document.getElementById('blogModal').classList.remove('hidden');
+        }
+
+        function closeBlogPost() {
+            document.getElementById('blogModal').classList.add('hidden');
+        }
+
+        function shareBlog() {
+            const title = document.getElementById('blogTitle').textContent;
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: 'Baca artikel menarik dari Muhammad Azzam Arvanda Saputra',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const url = window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('📋 Link artikel berhasil disalin ke clipboard!');
+                });
+            }
+        }
+
+        function likeBlog() {
+            alert('❤️ Terima kasih sudah menyukai artikel ini!');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('blogModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBlogPost();
+            }
+        });
+
+        // Initialize page when loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d3f3c333cefe17',t:'MTc1NzU2MDAxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -3,804 +3,1045 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Siswa RPL - l</title>
+    <title>Muhammad Azzam Arvanda Saputra - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        secondary: '#3b82f6',
-                        accent: '#60a5fa',
-                        dark: '#1e293b'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        body {
+            box-sizing: border-box;
         }
-        .card-hover {
-            transition: all 0.3s ease;
+        
+        .aurora-bg {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        
+        .aurora-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at top, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at bottom, rgba(255, 119, 198, 0.2) 0%, transparent 50%);
+            animation: aurora 8s ease-in-out infinite alternate;
         }
+        
+        @keyframes aurora {
+            0% { opacity: 0.5; transform: translateY(0px) rotate(0deg); }
+            100% { opacity: 0.8; transform: translateY(-10px) rotate(1deg); }
+        }
+        
         .glass-effect {
-            backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(120, 119, 198, 0.3);
+        }
+        
+        .social-link {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.1);
+            color: #7877c6;
+        }
+        
+        .login-form {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+        }
+        
+        .admin-panel {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
         }
     </style>
 </head>
-<body 
-  -- Konten lain di sini -->
-  <form onsubmit="sendMessage(event)">
-    <input name="nama" required>
-    <input name="email" required>
-    <input name="subjek" required>
-    <textarea name="pesan" required></textarea>
-    <button type="submit">Kirim</button>
-  </form>
-
-  <!-- ✅ Taruh script-nya di bawah sini -->
-  <script>
-    function sendMessage(event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const data = {
-        nama: form.nama.value,
-        email: form.email.value,
-        subjek: form.subjek.value,
-        pesan: form.pesan.value,
-      };
-
-      const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-
-      fetch(scriptURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(() => {
-        alert('Pesan berhasil dikirim!');
-        form.reset();
-      })
-      .catch(() => {
-        alert('Gagal mengirim pesan.');
-      });
-    }
-  </script>   
+<body class="aurora-bg min-h-screen text-white font-sans">
     
-  </body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
-                        💻
-                    </div>
-                    <div>
-                        <div class="text-xl font-bold text-primary" id="navName">Muhammad Azzam Arvanda Saputra</div>
-                        <div class="text-xs text-gray-600">Siswa RPL SMK</div>
-                    </div>
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="login-form rounded-2xl p-8 w-full max-w-md border border-purple-500/30">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-white mb-2">Login Portfolio</h2>
+                <p class="text-gray-300 text-sm">[Demo Mode - Masukkan kredensial apapun]</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="Masukkan username" required>
                 </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-gray-700 hover:text-primary transition font-medium">Beranda</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary transition font-medium">Tentang Saya</a>
-                    <a href="#projects" class="text-gray-700 hover:text-primary transition font-medium">Proyek</a>
-                    <a href="#testimonials" class="text-gray-700 hover:text-primary transition font-medium">Testimoni</a>
-                    <a href="#blog" class="text-gray-700 hover:text-primary transition font-medium">Blog</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary transition font-medium">Kontak</a>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="Masukkan password" required>
                 </div>
-                <div class="flex space-x-2">
-                    <button onclick="toggleAdmin()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
-                        ⚙️ Admin
-                    </button>
-                    <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition text-sm">
-                        🚪 Logout
-                    </button>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                    Masuk ke Portfolio
+                </button>
+            </form>
+        </div>
+    </div>
+
+  <!-- Navigation -->
+<nav class="glass-effect fixed top-0 w-full z-40 px-6 py-4">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    
+    <!-- Foto profil dan nama -->
+    <div class="flex items-center space-x-4">
+      <img src="WhatsApp Image 2025-09-25 at 09.32.52 (1).jpeg" alt="Foto Profil" class="w-12 h-12 rounded-full object-cover border-2 border-purple-500" />
+      <h1 class="text-xl font-bold">M. Azzam Arvanda</h1>
+    </div>
+
+    <div class="flex space-x-6">
+      <a href="#home" class="hover:text-purple-300 transition duration-300">Home</a>
+      <a href="#about" class="hover:text-purple-300 transition duration-300">About</a>
+      <a href="#projects" class="hover:text-purple-300 transition duration-300">Projects</a>
+      <a href="#contact" class="hover:text-purple-300 transition duration-300">Contact</a>
+      <button id="adminBtn" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition duration-300">Admin</button>
+    </div>
+  </div>
+</nav>
+
+       <!-- Navbar dengan Foto Profil -->
+<nav class="glass-effect fixed top-0 w-full z-40 px-6 py-4 bg-black bg-opacity-60">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <!-- Foto profil dan nama -->
+    <div class="flex items-center space-x-4">
+      <img src="profil.jpeg" alt="Foto Profil" class="w-12 h-12 rounded-full object-cover border-2 border-purple-500" />
+      <h1 class="text-xl font-bold text-white">M. Azzam Arvanda</h1>
+    </div>
+
+    <div class="flex space-x-6 text-white">
+      <a href="#home" class="hover:text-purple-300 transition duration-300">Home</a>
+      <a href="#about" class="hover:text-purple-300 transition duration-300">About</a>
+      <a href="#projects" class="hover:text-purple-300 transition duration-300">Projects</a>
+      <a href="#contact" class="hover:text-purple-300 transition duration-300">Contact</a>
+      <button id="adminBtn" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition duration-300">Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section dengan Foto Profil Lingkaran -->
+<section id="home" class="min-h-screen flex items-center justify-center px-6 pt-28 bg-gradient-to-b from-gray-900 to-black text-center">
+  <div class="max-w-4xl mx-auto">
+    <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-purple-500">
+      <img src="WhatsApp Image 2025-09-25 at 09.32.52 (1).jpeg" alt="Foto Profil" class="w-full h-full object-cover" />
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+      Muhammad Azzam<br />Arvanda Saputra
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-300 mb-8">
+      Full Stack Developer & UI/UX Designer
+    </p>
+    <div class="flex justify-center space-x-4">
+      <button class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+        Lihat Portfolio
+      </button>
+      <button class="border border-white/30 hover:bg-white/10 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+        Download CV
+      </button>
+    </div>
+  </div>
+</section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-16">Tentang Saya</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="glass-effect rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-4">Profil</h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Saya adalah seorang Full Stack Developer dengan passion dalam menciptakan pengalaman digital yang menakjubkan. Dengan keahlian dalam berbagai teknologi modern, saya selalu berusaha memberikan solusi terbaik untuk setiap proyek.
+                        </p>
+                        <div class="space-y-2">
+                            <p><span class="font-semibold">Lokasi:</span> Indonesia</p>
+                            <p><span class="font-semibold">Pengalaman:</span> 3+ Tahun</p>
+                            <p><span class="font-semibold">Spesialisasi:</span> Web Development, Mobile Apps</p>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">Keahlian</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span>JavaScript/TypeScript</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span>React/Next.js</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span>Node.js</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span>UI/UX Design</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-blue-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-16">Proyek Terbaru</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="project-card glass-effect rounded-2xl p-6" onclick="openProject('E-Commerce Platform')">
+                        <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-300 mb-4">Platform e-commerce modern dengan fitur lengkap dan UI yang responsif.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-blue-600/30 text-blue-300 px-3 py-1 rounded-full text-sm">Node.js</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-effect rounded-2xl p-6" onclick="openProject('Mobile Banking App')">
+                        <div class="w-full h-48 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Mobile Banking App</h3>
+                        <p class="text-gray-300 mb-4">Aplikasi mobile banking dengan keamanan tinggi dan UX yang intuitif.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm">Flutter</span>
+                            <span class="bg-teal-600/30 text-teal-300 px-3 py-1 rounded-full text-sm">Firebase</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card glass-effect rounded-2xl p-6" onclick="openProject('Portfolio Website')">
+                        <div class="w-full h-48 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg mb-4 flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Portfolio Website</h3>
+                        <p class="text-gray-300 mb-4">Website portfolio interaktif dengan animasi dan desain modern.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-orange-600/30 text-orange-300 px-3 py-1 rounded-full text-sm">Next.js</span>
+                            <span class="bg-red-600/30 text-red-300 px-3 py-1 rounded-full text-sm">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-8">Mari Berkolaborasi</h2>
+                <p class="text-xl text-gray-300 mb-12">
+                    Tertarik untuk bekerja sama? Jangan ragu untuk menghubungi saya!
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="glass-effect rounded-2xl p-6">
+                        <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Email</h3>
+                        <a href="mailto:zamspride17@gmail.com" class="social-link text-gray-300 hover:text-purple-300">
+                            zamspride17@gmail.com
+                        </a>
+                    </div>
+                    
+                    <div class="glass-effect rounded-2xl p-6">
+                        <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">WhatsApp</h3>
+                        <a href="https://wa.me/6281336306181" target="_blank" rel="noopener noreferrer" class="social-link text-gray-300 hover:text-green-300">
+                            +62 813-3630-6181
+                        </a>
+                    </div>
+                    
+                    <div class="glass-effect rounded-2xl p-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Instagram</h3>
+                        <a href="https://instagram.com/azzam.arvanda" target="_blank" rel="noopener noreferrer" class="social-link text-gray-300 hover:text-pink-300">
+                            @azzam.arvanda
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass-effect py-8 px-6 text-center">
+            <p class="text-gray-300">
+                © 2024 Muhammad Azzam Arvanda Saputra. All rights reserved.
+            </p>
+        </footer>
+    </div>
 
     <!-- Admin Panel -->
-    <div id="adminPanel" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-primary">🎛️ Panel Admin - Edit Profil</h2>
-                    <button onclick="toggleAdmin()" class="text-gray-500 hover:text-gray-700 text-2xl">
-                        ✕
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Personal Info -->
-                    <div class="bg-gray-50 rounded-xl p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-primary">📝 Info Personal</h3>
+    <div id="adminPanel" class="hidden fixed inset-0 z-50 admin-panel">
+        <div class="h-full flex">
+            <!-- Sidebar -->
+            <div class="w-64 bg-black/50 p-6 border-r border-purple-500/30 overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-8 text-purple-300">Admin Panel</h2>
+                <nav class="space-y-4">
+                    <button onclick="showAdminSection('dashboard')" class="admin-nav-btn w-full text-left px-4 py-2 rounded-lg hover:bg-purple-600/30 transition duration-300">Dashboard</button>
+                    <button onclick="showAdminSection('projects')" class="admin-nav-btn w-full text-left px-4 py-2 rounded-lg hover:bg-purple-600/30 transition duration-300">Kelola Proyek</button>
+                    <button onclick="showAdminSection('messages')" class="admin-nav-btn w-full text-left px-4 py-2 rounded-lg hover:bg-purple-600/30 transition duration-300">Pesan</button>
+                    <button onclick="showAdminSection('settings')" class="admin-nav-btn w-full text-left px-4 py-2 rounded-lg hover:bg-purple-600/30 transition duration-300">Pengaturan</button>
+                </nav>
+                <button onclick="closeAdmin()" class="mt-8 w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition duration-300">Keluar</button>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="flex-1 p-8 overflow-y-auto h-screen">
+                <!-- Dashboard -->
+                <div id="admin-dashboard" class="admin-section">
+                    <h3 class="text-3xl font-bold mb-8">Dashboard</h3>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-lg font-semibold mb-2">Total Proyek</h4>
+                            <p class="text-3xl font-bold text-purple-300">12</p>
+                        </div>
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-lg font-semibold mb-2">Pesan Baru</h4>
+                            <p class="text-3xl font-bold text-blue-300">5</p>
+                        </div>
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-lg font-semibold mb-2">Pengunjung</h4>
+                            <p class="text-3xl font-bold text-green-300">1,234</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-effect rounded-xl p-6">
+                        <h4 class="text-xl font-semibold mb-4">Aktivitas Terbaru</h4>
                         <div class="space-y-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                                <input type="text" id="adminName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="Muhammad Azzam Arvanda Saputra">
+                            <div class="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                                <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                <span>Proyek "E-Commerce Platform" telah diperbarui</span>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelas</label>
-                                <input type="text" id="adminClass" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="RPL 1">
+                            <div class="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                                <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                                <span>Pesan baru dari client@example.com</span>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">NIS</label>
-                                <input type="text" id="adminNis" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="2021001">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <input type="email" id="adminEmail" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" value="zamspride17gmail.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Bio Singkat</label>
-                                <textarea id="adminBio" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.</textarea>
+                            <div class="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <span>Portfolio dikunjungi 50 kali hari ini</span>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Skills & Achievements -->
-                    <div class="bg-gray-50 rounded-xl p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-primary">🏆 Skills & Prestasi</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Skills (pisahkan dengan koma)</label>
-                                <textarea id="adminSkills" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git</textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Prestasi</label>
-                                <textarea id="adminAchievements" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023
-🥈 Juara 2 Hackathon SMK Se-Jawa Barat 2023
-🏅 Sertifikat Junior Web Developer
-📜 Sertifikat Database Management</textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Projects -->
-                    <div class="bg-gray-50 rounded-xl p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-primary">💼 Proyek</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Daftar Proyek (format: Nama|Deskripsi|Tech)</label>
-                                <textarea id="adminProjects" rows="6" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap
-Task Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB
-School Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery
-Portfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 flex justify-end space-x-3">
-                    <button onclick="resetData()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition">
-                        🔄 Reset
-                    </button>
-                    <button onclick="saveChanges()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/80 transition">
-                        💾 Simpan Perubahan
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="home" class="gradient-bg min-h-screen flex items-center pt-20">
-        <div class="max-w-7xl mx-auto px-4 py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="text-white">
-                    <div class="inline-block bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                        <span class="text-sm font-medium">👋 Halo, Saya</span>
-                    </div>
-                    <h1 class="text-5xl lg:text-6xl font-bold mb-6" id="heroName">Muhammad Azzam Arvanda Saputra</h1>
-                    <p class="text-xl mb-4 opacity-90">Siswa <span id="heroClass">XII RPL 3</span> - SMK Krian 1</p>
-                    <p class="text-lg mb-8 opacity-80" id="heroBio">Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <button onclick="scrollToSection('projects')" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
-                            🚀 Lihat Proyek
-                        </button>
-                        <button onclick="scrollToSection('contact')" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition">
-                            📞 Hubungi Saya
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-center">
-                    <div class="relative">
-                      <div class="w-80 h-80 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
-  <img src="profil.jpeg" alt="Foto Profil" class="w-full h-full object-cover">
-</div>
-
-                        </div>
-                        <div class="absolute -top-4 -right-4 w-20 h-20 bg-accent rounded-full flex items-center justify-center text-2xl animate-bounce">
-                            💡
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-xl animate-pulse">
-                            🎯
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-dark mb-4">🎓 Tentang Saya</h2>
-                <p class="text-xl text-gray-600">Mengenal lebih dekat profil dan kemampuan saya</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Profile Card -->
-                <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 text-white card-hover">
-                    <div class="text-6xl mb-4">📋</div>
-                    <h3 class="text-2xl font-bold mb-4">Data Diri</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span class="opacity-80">Nama:</span>
-                            <span class="font-semibold" id="aboutName">Muhammad Azzam Arvanda Saputra</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="opacity-80">Kelas:</span>
-                            <span class="font-semibold" id="aboutClass">XII RPL 3</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="opacity-80">NIS:</span>
-                            <span class="font-semibold" id="aboutNis">2021001</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="opacity-80">Email:</span>
-                            <span class="font-semibold" id="aboutEmail">zamspride17@gmail.com
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills Card -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl card-hover border border-gray-100">
-                    <div class="text-6xl mb-4">🛠️</div>
-                    <h3 class="text-2xl font-bold text-dark mb-4">Keahlian</h3>
-                    <div class="flex flex-wrap gap-2" id="skillsList">
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">HTML</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">CSS</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">PHP</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Laravel</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">React</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Node.js</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">MySQL</span>
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Git</span>
-                    </div>
-                </div>
-
-                <!-- Achievements Card -->
-                <div class="bg-gradient-to-br from-accent to-secondary rounded-2xl p-8 text-white card-hover">
-                    <div class="text-6xl mb-4">🏆</div>
-                    <h3 class="text-2xl font-bold mb-4">Prestasi</h3>
-                    <div class="space-y-3" id="achievementsList">
-                        <div class="flex items-start space-x-2">
-                            <span>🥇</span>
-                            <span class="text-sm">Juara 1 Lomba Web Design Tingkat Provinsi 2023</span>
-                        </div>
-                        <div class="flex items-start space-x-2">
-                            <span>🥈</span>
-                            <span class="text-sm">Juara 2 Hackathon SMK Se-Jawa Timur 2023</span>
-                        </div>
-                        <div class="flex items-start space-x-2">
-                            <span>🏅</span>
-                            <span class="text-sm">Sertifikat Junior Web Developer</span>
-                        </div>
-                        <div class="flex items-start space-x-2">
-                            <span>📜</span>
-                            <span class="text-sm">Sertifikat Database Management</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-dark mb-4">💼 Proyek Saya</h2>
-                <p class="text-xl text-gray-600">Beberapa proyek yang telah saya kerjakan</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8" id="projectsList">
-                <!-- Projects will be populated by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-dark mb-4">💬 Testimoni</h2>
-                <p class="text-xl text-gray-600">Apa kata guru dan teman-teman tentang saya</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-xl">
-                            👨‍🏫
-                        </div>
-                        <div class="ml-3">
-                            <div class="font-semibold text-dark">Pak Budi Santoso</div>
-                            <div class="text-sm text-gray-600">Guru RPL</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Azzam adalah siswa yang sangat tekun dan kreatif. Kemampuan coding-nya sangat baik dan selalu membantu teman-temannya."</p>
-                    <div class="flex text-yellow-400 mt-3">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white text-xl">
-                            👩‍💼
-                        </div>
-                        <div class="ml-3">
-                            <div class="font-semibold text-dark">Bu Sari Dewi</div>
-                            <div class="text-sm text-gray-600">Wali Kelas</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Siswa yang bertanggung jawab dan memiliki leadership yang baik. Sering memimpin proyek kelompok dengan hasil yang memuaskan."</p>
-                    <div class="flex text-yellow-400 mt-3">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-xl card-hover border border-gray-100">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white text-xl">
-                            👨‍🎓
-                        </div>
-                        <div class="ml-3">
-                            <div class="font-semibold text-dark">Rian Pratama</div>
-                            <div class="text-sm text-gray-600">Teman Sekelas</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic">"Azzam orangnya baik dan suka berbagi ilmu. Kalau ada yang kesulitan coding, dia selalu siap membantu dengan sabar."</p>
-                    <div class="flex text-yellow-400 mt-3">
-                        ⭐⭐⭐⭐⭐
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-dark mb-4">📝 Blog & Artikel</h2>
-                <p class="text-xl text-gray-600">Berbagi pengalaman dan tips seputar programming</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('html-css-tips')">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
-                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <pattern id="code-pattern" patternUnits="userSpaceOnUse" width="40" height="40">
-                                    <rect width="40" height="40" fill="#1e40af"/>
-                                    <text x="5" y="15" fill="#60a5fa" font-family="monospace" font-size="8">&lt;/&gt;</text>
-                                    <text x="5" y="30" fill="#3b82f6" font-family="monospace" font-size="6">CSS</text>
-                                </pattern>
-                            </defs>
-                            <rect width="100%" height="100%" fill="url(#code-pattern)" opacity="0.3"/>
-                            <circle cx="100" cy="60" r="30" fill="#ffffff" opacity="0.2"/>
-                            <circle cx="300" cy="140" r="40" fill="#ffffff" opacity="0.1"/>
-                            <text x="200" y="110" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">HTML & CSS</text>
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">15 November 2023</div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Tips Belajar HTML & CSS untuk Pemula</h3>
-                        <p class="text-gray-600 mb-4">Panduan lengkap untuk memulai belajar web development dari dasar. Cocok untuk siswa yang baru mulai belajar coding.</p>
-                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
-                    </div>
-                </article>
-
-                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('programming-contest')">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-blue-600 relative overflow-hidden">
-                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" fill="url(#trophy-bg)"/>
-                            <defs>
-                                <pattern id="trophy-bg" patternUnits="userSpaceOnUse" width="50" height="50">
-                                    <rect width="50" height="50" fill="#059669"/>
-                                    <circle cx="25" cy="25" r="3" fill="#34d399" opacity="0.5"/>
-                                </pattern>
-                            </defs>
-                            <polygon points="200,50 220,90 260,90 230,115 240,155 200,130 160,155 170,115 140,90 180,90" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
-                            <text x="200" y="180" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">PROGRAMMING CONTEST</text>
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">10 November 2023</div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Pengalaman Ikut Lomba Programming</h3>
-                        <p class="text-gray-600 mb-4">Cerita seru dan tips sukses mengikuti kompetisi programming tingkat provinsi. Pelajaran berharga yang bisa dibagi.</p>
-                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
-                    </div>
-                </article>
-
-                <article class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer" onclick="openBlogPost('javascript-frameworks')">
-                    <div class="h-48 bg-gradient-to-br from-yellow-500 to-red-600 relative overflow-hidden">
-                        <svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" fill="#f59e0b"/>
-                            <circle cx="120" cy="80" r="25" fill="#3b82f6" opacity="0.8"/>
-                            <text x="120" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">React</text>
-                            <circle cx="200" cy="80" r="25" fill="#10b981" opacity="0.8"/>
-                            <text x="200" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Vue</text>
-                            <circle cx="280" cy="80" r="25" fill="#ef4444" opacity="0.8"/>
-                            <text x="280" y="87" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Angular</text>
-                            <text x="200" y="140" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">JS Frameworks</text>
-                            <path d="M50,160 Q200,120 350,160" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">5 November 2023</div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Framework JavaScript yang Wajib Dipelajari</h3>
-                        <p class="text-gray-600 mb-4">Review singkat tentang React, Vue, dan Angular. Mana yang cocok untuk pemula dan bagaimana cara memulainya.</p>
-                        <button class="text-primary font-semibold hover:text-primary/80 transition">Baca Selengkapnya →</button>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-dark mb-4">📞 Hubungi Saya</h2>
-                <p class="text-xl text-gray-600">Mari berkolaborasi atau sekadar ngobrol tentang teknologi</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold text-dark mb-6">💬 Mari Terhubung</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-xl">
-                                📧
-                            </div>
-                            <div>
-                                <div class="font-semibold text-dark">Email</div>
-                                <div class="text-gray-600" id="contactEmail">azzam@smkdigital.sch.id</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white text-xl">
-                                📱
-                            </div>
-                            <div>
-                                <div class="font-semibold text-dark">WhatsApp</div>
-                                <div class="text-gray-600">+62 813-3630-6181</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl">
-                            <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white text-xl">
-                                📷
-                            </div>
-                            <div>
-                                <div class="font-semibold text-dark">Instagram</div>
-                                <div class="text-gray-600">@4zzam
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="bg-gray-50 rounded-2xl p-8">
-                    <h3 class="text-2xl font-bold text-dark mb-6">✉️ Kirim Pesan</h3>
-                    <form class="space-y-4" onsubmit="sendMessage(event)">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan nama Anda">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Masukkan email Anda">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Subjek</label>
-                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Subjek pesan">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Pesan</label>
-                            <textarea rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Tulis pesan Anda di sini..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/80 transition">
-                            🚀 Kirim Pesan
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Post Modal -->
-    <div id="blogModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-2xl p-8 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-primary" id="blogTitle">Judul Artikel</h2>
-                    <button onclick="closeBlogPost()" class="text-gray-500 hover:text-gray-700 text-2xl">
-                        ✕
-                    </button>
                 </div>
                 
-                <div class="mb-6">
-                    <div class="text-sm text-gray-500 mb-4" id="blogDate">Tanggal</div>
-                    <div class="h-64 rounded-xl overflow-hidden mb-6" id="blogImage">
-                        <!-- Blog image will be inserted here -->
+                <!-- Projects Management -->
+                <div id="admin-projects" class="admin-section hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="text-3xl font-bold">Kelola Proyek</h3>
+                        <button onclick="showAddProject()" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg transition duration-300">Tambah Proyek</button>
+                    </div>
+                    
+                    <div class="glass-effect rounded-xl p-6">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-white/20">
+                                        <th class="text-left py-3">Foto</th>
+                                        <th class="text-left py-3">Nama Proyek</th>
+                                        <th class="text-left py-3">Status</th>
+                                        <th class="text-left py-3">Tanggal</th>
+                                        <th class="text-left py-3">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectsTable">
+                                    <tr class="border-b border-white/10">
+                                        <td class="py-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                                                </svg>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">E-Commerce Platform</td>
+                                        <td class="py-3"><span class="bg-green-600/30 text-green-300 px-3 py-1 rounded-full text-sm">Selesai</span></td>
+                                        <td class="py-3">15 Nov 2024</td>
+                                        <td class="py-3">
+                                            <button onclick="editProject(0)" class="text-blue-400 hover:text-blue-300 mr-3">Edit</button>
+                                            <button onclick="deleteProject(0)" class="text-red-400 hover:text-red-300">Hapus</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-white/10">
+                                        <td class="py-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z"/>
+                                                </svg>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">Mobile Banking App</td>
+                                        <td class="py-3"><span class="bg-yellow-600/30 text-yellow-300 px-3 py-1 rounded-full text-sm">Progress</span></td>
+                                        <td class="py-3">10 Nov 2024</td>
+                                        <td class="py-3">
+                                            <button onclick="editProject(1)" class="text-blue-400 hover:text-blue-300 mr-3">Edit</button>
+                                            <button onclick="deleteProject(1)" class="text-red-400 hover:text-red-300">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-                <div class="prose max-w-none" id="blogContent">
-                    <!-- Blog content will be inserted here -->
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-80 h-80 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
-  <img src="profil.jpeg" alt="Foto Profil" class="w-full h-full object-cover">
-</div>
-
+                
+                <!-- Add/Edit Project Modal -->
+                <div id="projectModal" class="hidden fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/50">
+                    <div class="glass-effect rounded-2xl p-8 w-full max-w-2xl border border-purple-500/30 max-h-[90vh] overflow-y-auto">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 id="projectModalTitle" class="text-2xl font-bold">Tambah Proyek Baru</h3>
+                            <button onclick="closeProjectModal()" class="text-gray-400 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <form id="projectForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Nama Proyek</label>
+                                    <input type="text" id="projectName" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="Masukkan nama proyek" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Status</label>
+                                    <select id="projectStatus" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-purple-500">
+                                        <option value="progress">Progress</option>
+                                        <option value="selesai">Selesai</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                </div>
                             </div>
+                            
                             <div>
-                                <div class="font-semibold text-dark">Muhammad Azzam Arvanda Saputra</div>
-                                <div class="text-sm text-gray-600">Siswa RPL SMK Krian 1</div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Deskripsi</label>
+                                <textarea id="projectDescription" rows="3" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="Deskripsi proyek"></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Upload Foto Proyek</label>
+                                <div class="border-2 border-dashed border-white/20 rounded-lg p-6 text-center">
+                                    <input type="file" id="projectImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                                    <div id="imagePreview" class="mb-4">
+                                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <p class="text-gray-400">Klik untuk upload foto</p>
+                                    </div>
+                                    <button type="button" onclick="document.getElementById('projectImage').click()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition duration-300">
+                                        Pilih Foto
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">Teknologi (pisahkan dengan koma)</label>
+                                <input type="text" id="projectTech" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="React, Node.js, MongoDB">
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Link Demo</label>
+                                    <input type="url" id="projectDemo" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="https://demo.example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Link GitHub</label>
+                                    <input type="url" id="projectGithub" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500" placeholder="https://github.com/ZAMLENATHEA77/zamlenathea.github.com">
+                                </div>
+                            </div>
+                            
+                            <div class="flex space-x-4">
+                                <button type="submit" class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                    Simpan Proyek
+                                </button>
+                                <button type="button" onclick="closeProjectModal()" class="px-6 py-3 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition duration-300">
+                                    Batal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Messages -->
+                <div id="admin-messages" class="admin-section hidden">
+                    <h3 class="text-3xl font-bold mb-8">Pesan Masuk</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="glass-effect rounded-xl p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-semibold">John Doe</h4>
+                                    <p class="text-sm text-gray-400">john@example.com</p>
+                                </div>
+                                <span class="text-sm text-gray-400">2 jam lalu</span>
+                            </div>
+                            <p class="text-gray-300">Halo, saya tertarik dengan layanan web development Anda. Bisakah kita diskusi lebih lanjut?</p>
+                            <div class="mt-4 space-x-3">
+                                <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm transition duration-300">Balas</button>
+                                <button class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm transition duration-300">Tandai Dibaca</button>
                             </div>
                         </div>
-                        <div class="flex space-x-2">
-                            <button onclick="shareBlog()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
-                                📤 Bagikan
-                            </button>
-                            <button onclick="likeBlog()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition text-sm">
-                                ❤️ Suka
-                            </button>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-semibold">Sarah Wilson</h4>
+                                    <p class="text-sm text-gray-400">sarah@company.com</p>
+                                </div>
+                                <span class="text-sm text-gray-400">1 hari lalu</span>
+                            </div>
+                            <p class="text-gray-300">Proyek yang Anda kerjakan sangat mengesankan! Apakah Anda tersedia untuk proyek baru?</p>
+                            <div class="mt-4 space-x-3">
+                                <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm transition duration-300">Balas</button>
+                                <button class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm transition duration-300">Tandai Dibaca</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings -->
+                <div id="admin-settings" class="admin-section hidden">
+                    <h3 class="text-3xl font-bold mb-8">Pengaturan</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="glass-effect rounded-xl p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-xl font-semibold">Profil</h4>
+                                <button onclick="toggleEditProfile()" id="editProfileBtn" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition duration-300">Edit</button>
+                            </div>
+                            <form id="profileForm" class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Nama Lengkap</label>
+                                        <input type="text" id="fullName" value="Muhammad Azzam Arvanda Saputra" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Email</label>
+                                        <input type="email" id="email" value="zamspride17@gmail.com" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white" disabled>
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Profesi</label>
+                                        <input type="text" id="profession" value="Full Stack Developer & UI/UX Designer" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Lokasi</label>
+                                        <input type="text" id="location" value="Indonesia" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white" disabled>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Bio</label>
+                                    <textarea id="bio" rows="3" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white" disabled>Saya adalah seorang Full Stack Developer dengan passion dalam menciptakan pengalaman digital yang menakjubkan. Dengan keahlian dalam berbagai teknologi modern, saya selalu berusaha memberikan solusi terbaik untuk setiap proyek.</textarea>
+                                </div>
+                                <div class="hidden" id="profileSaveButtons">
+                                    <div class="flex space-x-4">
+                                        <button type="submit" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg transition duration-300">Simpan</button>
+                                        <button type="button" onclick="cancelEditProfile()" class="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg transition duration-300">Batal</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-xl font-semibold mb-4">Media Sosial</h4>
+                            <form id="socialForm" class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">WhatsApp</label>
+                                        <input type="url" id="whatsappUrl" value="https://wa.me/6281336306181" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Instagram</label>
+                                        <input type="url" id="instagramUrl" value="https://instagram.com/4zzam" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Email</label>
+                                        <input type="email" id="emailUrl" value="zamspride17@gmail.com" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">GitHub</label>
+                                        <input type="url" id="githubUrl" value="https://github.com/ZAMLENATHEA77/zamlenathea.github.com" class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    </div>
+                                </div>
+                                <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition duration-300">Update Media Sosial</button>
+                            </form>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-xl font-semibold mb-4">Keahlian</h4>
+                            <div id="skillsContainer" class="space-y-4">
+                                <div class="skill-item flex items-center space-x-4">
+                                    <input type="text" value="JavaScript/TypeScript" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <input type="number" value="90" min="0" max="100" class="w-20 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <button onclick="removeSkill(this)" class="text-red-400 hover:text-red-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="skill-item flex items-center space-x-4">
+                                    <input type="text" value="React/Next.js" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <input type="number" value="85" min="0" max="100" class="w-20 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <button onclick="removeSkill(this)" class="text-red-400 hover:text-red-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="skill-item flex items-center space-x-4">
+                                    <input type="text" value="Node.js" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <input type="number" value="80" min="0" max="100" class="w-20 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <button onclick="removeSkill(this)" class="text-red-400 hover:text-red-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="skill-item flex items-center space-x-4">
+                                    <input type="text" value="UI/UX Design" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <input type="number" value="75" min="0" max="100" class="w-20 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                                    <button onclick="removeSkill(this)" class="text-red-400 hover:text-red-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mt-4 space-x-4">
+                                <button onclick="addSkill()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg transition duration-300">Tambah Keahlian</button>
+                                <button onclick="saveSkills()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition duration-300">Simpan Keahlian</button>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-xl font-semibold mb-4">Keamanan</h4>
+                            <div class="space-y-4">
+                                <button onclick="changePassword()" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg transition duration-300">Ubah Password</button>
+                                <button onclick="toggle2FA()" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition duration-300">Aktifkan 2FA</button>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-effect rounded-xl p-6">
+                            <h4 class="text-xl font-semibold mb-4">Notifikasi</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="mr-3" onchange="updateNotificationSettings()">
+                                    <span>Email untuk pesan baru</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" checked class="mr-3" onchange="updateNotificationSettings()">
+                                    <span>Notifikasi proyek</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-3" onchange="updateNotificationSettings()">
+                                    <span>Newsletter mingguan</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
-                            💻
-                        </div>
-                        <div>
-                            <div class="text-xl font-bold" id="footerName">Muhammad Azzam Arvanda Saputra</div>
-                            <div class="text-sm text-gray-400">Siswa RPL SMK</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-400">Passionate dalam pengembangan web dan mobile app. Mari berkolaborasi untuk menciptakan solusi teknologi yang inovatif.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">🔗 Quick Links</h4>
-                    <div class="space-y-2">
-                        <a href="#home" class="block text-gray-400 hover:text-white transition">Beranda</a>
-                        <a href="#about" class="block text-gray-400 hover:text-white transition">Tentang Saya</a>
-                        <a href="#projects" class="block text-gray-400 hover:text-white transition">Proyek</a>
-                        <a href="#contact" class="block text-gray-400 hover:text-white transition">Kontak</a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">📧 Kontak</h4>
-                    <div class="space-y-2">
-                        <p class="text-gray-400">Email: zamspride17@gmail.com
-                        <p class="text-gray-400">WhatsApp: +62 813-3630-6181</p>
-                        <p class="text-gray-400">Instagram: @azzamarvanda</p>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Muhammad Azzam Arvanda Saputra. Dibuat dengan ❤️ untuk pembelajaran.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        // Data storage
-        let profileData = {
-            name: "Muhammad Azzam Arvanda Saputra",
-            class: "XII RPL 3",
-            nis: "2021001",
-            email: "zamspride17@gmail.com",
-            bio: "Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.",
-            skills: "HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git",
-            achievements: "🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023\n🥈 Juara 2 Hackathon SMK Se-Jawa Barat 2023\n🏅 Sertifikat Junior Web Developer\n📜 Sertifikat Database Management",
-            projects: "E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap\nTask Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB\nSchool Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery\nPortfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript"
-        };
+        // Global variables
+        let projects = [
+            {
+                name: 'E-Commerce Platform',
+                description: 'Platform e-commerce modern dengan fitur lengkap dan UI yang responsif.',
+                status: 'selesai',
+                date: '15 Nov 2024',
+                tech: ['React', 'Node.js'],
+                demo: 'https://demo-ecommerce.example.com',
+                github: 'https://github.com/ZAMLENATHEA77/zamlenathea.github.com',
+                image: null
+            },
+            {
+                name: 'Mobile Banking App',
+                description: 'Aplikasi mobile banking dengan keamanan tinggi dan UX yang intuitif.',
+                status: 'progress',
+                date: '10 Nov 2024',
+                tech: ['Flutter', 'Firebase'],
+                demo: 'https://demo-banking.example.com',
+                github: '://ghttps://github.com/ZAMLENATHEA77/zamlenathea.github.com',
+                image: null
+            },
+            {
+                name: 'Portfolio Website',
+                description: 'Website portfolio interaktif dengan animasi dan desain modern.',
+                status: 'selesai',
+                date: '5 Nov 2024',
+                tech: ['Next.js', 'Tailwind'],
+                demo: 'https://portfolio.example.com',
+                github: 'https://github.com/ZAMLENATHEA77/zamlenathea.github.com',
+                image: null
+            }
+        ];
+        
+        let currentEditingProject = -1;
 
-        // Initialize page
-        function initializePage() {
-            updateAllElements();
-            renderProjects();
-        }
-
-        // Update all elements with current data
-        function updateAllElements() {
-            // Update name in multiple places
-            document.getElementById('navName').textContent = profileData.name;
-            document.getElementById('heroName').textContent = profileData.name;
-            document.getElementById('aboutName').textContent = profileData.name;
-            document.getElementById('footerName').textContent = profileData.name;
-
-            // Update class
-            document.getElementById('heroClass').textContent = profileData.class;
-            document.getElementById('aboutClass').textContent = profileData.class;
-
-            // Update other info
-            document.getElementById('aboutNis').textContent = profileData.nis;
-            document.getElementById('aboutEmail').textContent = profileData.email;
-            document.getElementById('contactEmail').textContent = profileData.email;
-            document.getElementById('heroBio').textContent = profileData.bio;
-
-            // Update admin form
-            document.getElementById('adminName').value = profileData.name;
-            document.getElementById('adminClass').value = profileData.class;
-            document.getElementById('adminNis').value = profileData.nis;
-            document.getElementById('adminEmail').value = profileData.email;
-            document.getElementById('adminBio').value = profileData.bio;
-            document.getElementById('adminSkills').value = profileData.skills;
-            document.getElementById('adminAchievements').value = profileData.achievements;
-            document.getElementById('adminProjects').value = profileData.projects;
-
-            // Update skills
-            updateSkills();
-            updateAchievements();
-        }
-
-        // Update skills display
-        function updateSkills() {
-            const skillsList = document.getElementById('skillsList');
-            const skills = profileData.skills.split(',').map(skill => skill.trim());
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            skillsList.innerHTML = skills.map(skill => 
-                `<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">${skill}</span>`
-            ).join('');
-        }
-
-        // Update achievements display
-        function updateAchievements() {
-            const achievementsList = document.getElementById('achievementsList');
-            const achievements = profileData.achievements.split('\n').filter(achievement => achievement.trim());
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             
-            achievementsList.innerHTML = achievements.map(achievement => {
-                const parts = achievement.split(' ');
-                const emoji = parts[0];
-                const text = parts.slice(1).join(' ');
-                return `<div class="flex items-start space-x-2">
-                    <span>${emoji}</span>
-                    <span class="text-sm">${text}</span>
-                </div>`;
-            }).join('');
+            if (username && password) {
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('portfolioContent').classList.remove('hidden');
+            }
+        });
+
+        // Admin panel functionality
+        document.getElementById('adminBtn').addEventListener('click', function() {
+            document.getElementById('adminPanel').classList.remove('hidden');
+        });
+
+        function closeAdmin() {
+            document.getElementById('adminPanel').classList.add('hidden');
         }
 
-        // Render projects
-        function renderProjects() {
-            const projectsList = document.getElementById('projectsList');
-            const projects = profileData.projects.split('\n').filter(project => project.trim());
+        function showAdminSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(el => {
+                el.classList.add('hidden');
+            });
             
-            const projectIcons = ['🛒', '📋', '📚', '🌐'];
-            const projectColors = ['from-primary to-secondary', 'from-secondary to-accent', 'from-accent to-primary', 'from-primary to-accent'];
+            // Show selected section
+            document.getElementById('admin-' + section).classList.remove('hidden');
             
-            projectsList.innerHTML = projects.map((project, index) => {
-                const [name, description, tech] = project.split('|');
-                const icon = projectIcons[index % projectIcons.length];
-                const color = projectColors[index % projectColors.length];
-                
-                return `
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-xl card-hover">
-                        <div class="h-48 bg-gradient-to-br ${color} flex items-center justify-center text-6xl text-white">
-                            ${icon}
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark mb-3">${name}</h3>
-                            <p class="text-gray-600 mb-4">${description}</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                ${tech.split(',').map(t => `<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">${t.trim()}</span>`).join('')}
-                            </div>
-                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/80 transition text-sm">
-                                👁️ Lihat Detail
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            // Update nav buttons
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-purple-600/50');
+            });
+            event.target.classList.add('bg-purple-600/50');
         }
 
-        // Admin functions
-        function toggleAdmin() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('hidden');
+        // Project Management Functions
+        function showAddProject() {
+            currentEditingProject = -1;
+            document.getElementById('projectModalTitle').textContent = 'Tambah Proyek Baru';
+            document.getElementById('projectForm').reset();
+            document.getElementById('imagePreview').innerHTML = `
+                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <p class="text-gray-400">Klik untuk upload foto</p>
+            `;
+            document.getElementById('projectModal').classList.remove('hidden');
         }
 
-        function saveChanges() {
-            // Get values from admin form
-            profileData.name = document.getElementById('adminName').value;
-            profileData.class = document.getElementById('adminClass').value;
-            profileData.nis = document.getElementById('adminNis').value;
-            profileData.email = document.getElementById('adminEmail').value;
-            profileData.bio = document.getElementById('adminBio').value;
-            profileData.skills = document.getElementById('adminSkills').value;
-            profileData.achievements = document.getElementById('adminAchievements').value;
-            profileData.projects = document.getElementById('adminProjects').value;
-
-            // Update all elements
-            updateAllElements();
-            renderProjects();
-
-            // Show success message
-            alert('✅ Perubahan berhasil disimpan!');
-            toggleAdmin();
+        function editProject(index) {
+            currentEditingProject = index;
+            const project = projects[index];
+            
+            document.getElementById('projectModalTitle').textContent = 'Edit Proyek';
+            document.getElementById('projectName').value = project.name;
+            document.getElementById('projectDescription').value = project.description;
+            document.getElementById('projectStatus').value = project.status;
+            document.getElementById('projectTech').value = project.tech.join(', ');
+            document.getElementById('projectDemo').value = project.demo || '';
+            document.getElementById('projectGithub').value = project.github || '';
+            
+            if (project.image) {
+                document.getElementById('imagePreview').innerHTML = `<img src="${project.image}" class="w-full h-32 object-cover rounded-lg">`;
+            }
+            
+            document.getElementById('projectModal').classList.remove('hidden');
         }
 
-        function resetData() {
-            if (confirm('🔄 Yakin ingin mereset semua data ke default?')) {
-                profileData = {
-                    name: "Muhammad Azzam Arvanda Saputra",
-                    class: "XII RPL 3",
-                    nis: "2021001",
-                    email: "zamspride17@gmail.com",
-                    bio: "Siswa RPL yang passionate dalam pengembangan web dan mobile app. Suka belajar teknologi baru dan berbagi ilmu dengan teman-teman.",
-                    skills: "HTML, CSS, JavaScript, PHP, Laravel, React, Node.js, MySQL, Git",
-                    achievements: "🥇 Juara 1 Lomba Web Design Tingkat Provinsi 2023\n🥈 Juara 2 Hackathon SMK Se-Jawa Timur 2023\n🏅 Sertifikat Junior Web Developer\n📜 Sertifikat Database Management",
-                    projects: "E-Commerce Website|Website toko online dengan fitur lengkap|Laravel, MySQL, Bootstrap\nTask Management App|Aplikasi manajemen tugas untuk siswa|React, Node.js, MongoDB\nSchool Library System|Sistem perpustakaan sekolah digital|PHP, MySQL, jQuery\nPortfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript"
+        function deleteProject(index) {
+            if (confirm('Apakah Anda yakin ingin menghapus proyek ini?')) {
+                projects.splice(index, 1);
+                renderProjectsTable();
+                renderProjectsPortfolio();
+                alert('Proyek berhasil dihapus!');
+            }
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = `
+                        <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg mb-2">
+                        <p class="text-green-400 text-sm">Foto berhasil dipilih</p>
+                    `;
                 };
-                updateAllElements();
-                renderProjects();
-                alert('🔄 Data berhasil direset!');
+                reader.readAsDataURL(file);
             }
         }
 
-        function logout() {
-            if (confirm('🚪 Yakin ingin logout?')) {
-                alert('👋 Terima kasih telah mengunjungi profil saya!');
-                // In a real app, this would redirect to login page
-                window.location.reload();
+        // Project form submission
+        document.getElementById('projectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const projectData = {
+                name: document.getElementById('projectName').value,
+                description: document.getElementById('projectDescription').value,
+                status: document.getElementById('projectStatus').value,
+                tech: document.getElementById('projectTech').value.split(',').map(t => t.trim()),
+                demo: document.getElementById('projectDemo').value,
+                github: document.getElementById('projectGithub').value,
+                date: new Date().toLocaleDateString('id-ID'),
+                image: null
+            };
+            
+            // Handle image
+            const imagePreview = document.getElementById('imagePreview').querySelector('img');
+            if (imagePreview) {
+                projectData.image = imagePreview.src;
             }
-        }
+            
+            if (currentEditingProject === -1) {
+                projects.push(projectData);
+                alert('Proyek berhasil ditambahkan!');
+            } else {
+                projects[currentEditingProject] = projectData;
+                alert('Proyek berhasil diperbarui!');
+            }
+            
+            renderProjectsTable();
+            renderProjectsPortfolio();
+            closeProjectModal();
+        });
 
-        // Utility functions
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
+        function renderProjectsTable() {
+            const tbody = document.getElementById('projectsTable');
+            tbody.innerHTML = '';
+            
+            projects.forEach((project, index) => {
+                const statusClass = project.status === 'selesai' ? 'bg-green-600/30 text-green-300' : 
+                                  project.status === 'progress' ? 'bg-yellow-600/30 text-yellow-300' : 
+                                  'bg-gray-600/30 text-gray-300';
+                
+                const imageHtml = project.image ? 
+                    `<img src="${project.image}" class="w-12 h-12 rounded-lg object-cover">` :
+                    `<div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                        </svg>
+                    </div>`;
+                
+                tbody.innerHTML += `
+                    <tr class="border-b border-white/10">
+                        <td class="py-3">${imageHtml}</td>
+                        <td class="py-3">${project.name}</td>
+                        <td class="py-3"><span class="${statusClass} px-3 py-1 rounded-full text-sm">${project.status}</span></td>
+                        <td class="py-3">${project.date}</td>
+                        <td class="py-3">
+                            <button onclick="editProject(${index})" class="text-blue-400 hover:text-blue-300 mr-3">Edit</button>
+                            <button onclick="deleteProject(${index})" class="text-red-400 hover:text-red-300">Hapus</button>
+                        </td>
+                    </tr>
+                `;
             });
         }
 
-        function sendMessage(event) {
-            event.preventDefault();
-            alert('📧 Pesan berhasil dikirim! Terima kasih atas pesan Anda.');
-            event.target.reset();
+        function renderProjectsPortfolio() {
+            const projectsContainer = document.querySelector('#projects .grid');
+            projectsContainer.innerHTML = '';
+            
+            projects.forEach((project, index) => {
+                const techTags = project.tech.map(tech => 
+                    `<span class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm">${tech}</span>`
+                ).join('');
+                
+                const imageHtml = project.image ? 
+                    `<img src="${project.image}" class="w-full h-48 object-cover rounded-lg mb-4">` :
+                    `<div class="w-full h-48 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                        </svg>
+                    </div>`;
+                
+                projectsContainer.innerHTML += `
+                    <div class="project-card glass-effect rounded-2xl p-6" onclick="openProject('${project.name}', ${index})">
+                        ${imageHtml}
+                        <h3 class="text-xl font-bold mb-2">${project.name}</h3>
+                        <p class="text-gray-300 mb-4">${project.description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${techTags}
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        // Smooth scrolling for navigation links
+        // Project click functionality
+        function openProject(projectName, index) {
+            const project = projects[index];
+            let message = `Detail Proyek: ${projectName}\n\n`;
+            message += `Deskripsi: ${project.description}\n`;
+            message += `Status: ${project.status}\n`;
+            message += `Teknologi: ${project.tech.join(', ')}\n`;
+            
+            if (project.demo) {
+                message += `\nDemo: ${project.demo}`;
+                setTimeout(() => {
+                    if (confirm('Buka link demo di tab baru?')) {
+                        window.open(project.demo, '_blank', 'noopener,noreferrer');
+                    }
+                }, 100);
+            }
+            
+            if (project.github) {
+                message += `\nGitHub: ${project.github}`;
+                setTimeout(() => {
+                    if (confirm('Buka repository GitHub di tab baru?')) {
+                        window.open(project.github, '_blank', 'noopener,noreferrer');
+                    }
+                }, 200);
+            }
+            
+            alert(message);
+        }
+
+        // Profile Management Functions
+        function toggleEditProfile() {
+            const inputs = document.querySelectorAll('#profileForm input, #profileForm textarea');
+            const saveButtons = document.getElementById('profileSaveButtons');
+            const editBtn = document.getElementById('editProfileBtn');
+            
+            if (inputs[0].disabled) {
+                inputs.forEach(input => input.disabled = false);
+                saveButtons.classList.remove('hidden');
+                editBtn.textContent = 'Batal';
+            } else {
+                cancelEditProfile();
+            }
+        }
+
+        function cancelEditProfile() {
+            const inputs = document.querySelectorAll('#profileForm input, #profileForm textarea');
+            const saveButtons = document.getElementById('profileSaveButtons');
+            const editBtn = document.getElementById('editProfileBtn');
+            
+            inputs.forEach(input => input.disabled = true);
+            saveButtons.classList.add('hidden');
+            editBtn.textContent = 'Edit';
+        }
+
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profil berhasil diperbarui!');
+            cancelEditProfile();
+        });
+
+        document.getElementById('socialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Media sosial berhasil diperbarui!');
+        });
+
+        // Skills Management
+        function addSkill() {
+            const container = document.getElementById('skillsContainer');
+            const newSkill = document.createElement('div');
+            newSkill.className = 'skill-item flex items-center space-x-4';
+            newSkill.innerHTML = `
+                <input type="text" placeholder="Nama keahlian" class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                <input type="number" value="50" min="0" max="100" class="w-20 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white">
+                <button onclick="removeSkill(this)" class="text-red-400 hover:text-red-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+            `;
+            container.appendChild(newSkill);
+        }
+
+        function removeSkill(button) {
+            button.parentElement.remove();
+        }
+
+        function saveSkills() {
+            alert('Keahlian berhasil disimpan!');
+        }
+
+        // Security Functions
+        function changePassword() {
+            const newPassword = prompt('Masukkan password baru:');
+            if (newPassword) {
+                alert('Password berhasil diubah!');
+            }
+        }
+
+        function toggle2FA() {
+            if (confirm('Aktifkan autentikasi dua faktor?')) {
+                alert('2FA berhasil diaktifkan! Kode QR akan dikirim ke email Anda.');
+            }
+        }
+
+        function updateNotificationSettings() {
+            alert('Pengaturan notifikasi berhasil diperbarui!');
+        }
+
+        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -814,237 +1055,12 @@ Portfolio Website|Website portfolio pribadi responsive|HTML, CSS, JavaScript</te
             });
         });
 
-        // Blog data
-        const blogPosts = {
-            'html-css-tips': {
-                title: 'Tips Belajar HTML & CSS untuk Pemula',
-                date: '15 November 2023',
-                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="code-pattern-full" patternUnits="userSpaceOnUse" width="40" height="40">
-                            <rect width="40" height="40" fill="#1e40af"/>
-                            <text x="5" y="15" fill="#60a5fa" font-family="monospace" font-size="8">&lt;/&gt;</text>
-                            <text x="5" y="30" fill="#3b82f6" font-family="monospace" font-size="6">CSS</text>
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#code-pattern-full)" opacity="0.3"/>
-                    <circle cx="100" cy="60" r="30" fill="#ffffff" opacity="0.2"/>
-                    <circle cx="300" cy="140" r="40" fill="#ffffff" opacity="0.1"/>
-                    <text x="200" y="110" text-anchor="middle" fill="#ffffff" font-size="24" font-weight="bold">HTML & CSS</text>
-                </svg>`,
-                content: `
-                    <h3 class="text-2xl font-bold mb-4">🚀 Memulai Perjalanan Web Development</h3>
-                    <p class="mb-4">Sebagai siswa RPL, belajar HTML dan CSS adalah langkah pertama yang sangat penting dalam dunia web development. Berikut adalah tips-tips yang saya pelajari selama belajar:</p>
-                    
-                    <h4 class="text-xl font-semibold mb-3 mt-6">📝 1. Mulai dengan HTML Dasar</h4>
-                    <p class="mb-4">HTML adalah fondasi dari semua website. Pelajari struktur dasar seperti:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Tag-tag dasar: &lt;html&gt;, &lt;head&gt;, &lt;body&gt;</li>
-                        <li>Heading: &lt;h1&gt; sampai &lt;h6&gt;</li>
-                        <li>Paragraf dan teks: &lt;p&gt;, &lt;span&gt;, &lt;div&gt;</li>
-                        <li>Link dan gambar: &lt;a&gt;, &lt;img&gt;</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">🎨 2. Belajar CSS Secara Bertahap</h4>
-                    <p class="mb-4">CSS membuat website menjadi cantik. Mulai dengan:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Selector dasar: element, class, dan id</li>
-                        <li>Properties penting: color, background, font-size</li>
-                        <li>Box model: margin, padding, border</li>
-                        <li>Layout: flexbox dan grid</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">💡 3. Tips Praktis dari Pengalaman</h4>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Praktik setiap hari, meski hanya 30 menit</li>
-                        <li>Buat proyek kecil seperti landing page sederhana</li>
-                        <li>Gunakan developer tools di browser untuk debugging</li>
-                        <li>Jangan takut bereksperimen dengan kode</li>
-                        <li>Bergabung dengan komunitas developer untuk belajar bersama</li>
-                    </ul>
-
-                    <div class="bg-blue-50 p-4 rounded-lg mt-6">
-                        <p class="text-blue-800"><strong>💪 Motivasi:</strong> Ingat, setiap expert pernah menjadi pemula. Yang penting adalah konsistensi dan tidak menyerah saat menghadapi error!</p>
-                    </div>
-                `
-            },
-            'programming-contest': {
-                title: 'Pengalaman Ikut Lomba Programming',
-                date: '10 November 2023',
-                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="url(#trophy-bg-full)"/>
-                    <defs>
-                        <pattern id="trophy-bg-full" patternUnits="userSpaceOnUse" width="50" height="50">
-                            <rect width="50" height="50" fill="#059669"/>
-                            <circle cx="25" cy="25" r="3" fill="#34d399" opacity="0.5"/>
-                        </pattern>
-                    </defs>
-                    <polygon points="200,50 220,90 260,90 230,115 240,155 200,130 160,155 170,115 140,90 180,90" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
-                    <text x="200" y="180" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">PROGRAMMING CONTEST</text>
-                </svg>`,
-                content: `
-                    <h3 class="text-2xl font-bold mb-4">🏆 Perjalanan Menuju Juara Provinsi</h3>
-                    <p class="mb-4">Alhamdulillah, tahun ini saya berhasil meraih juara 1 lomba Web Design tingkat provinsi. Ini adalah pengalaman yang sangat berharga dan ingin saya bagikan kepada teman-teman.</p>
-                    
-                    <h4 class="text-xl font-semibold mb-3 mt-6">📚 Persiapan Sebelum Lomba</h4>
-                    <p class="mb-4">Persiapan adalah kunci sukses. Berikut yang saya lakukan:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Belajar intensif selama 3 bulan sebelum lomba</li>
-                        <li>Mengerjakan soal-soal tahun sebelumnya</li>
-                        <li>Berlatih dengan time pressure</li>
-                        <li>Mempelajari framework dan library terbaru</li>
-                        <li>Diskusi dengan guru dan senior yang berpengalaman</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">⚡ Hari H Lomba</h4>
-                    <p class="mb-4">Hari lomba adalah momen yang menegangkan tapi seru:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Bangun pagi dan sarapan yang cukup</li>
-                        <li>Baca soal dengan teliti dan buat planning</li>
-                        <li>Mulai dengan fitur yang paling penting dulu</li>
-                        <li>Jangan panik saat ada error, debug dengan tenang</li>
-                        <li>Manfaatkan waktu dengan efisien</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">🎯 Tantangan yang Dihadapi</h4>
-                    <p class="mb-4">Tidak semua berjalan mulus. Ada beberapa tantangan:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Waktu yang terbatas (hanya 4 jam)</li>
-                        <li>Soal yang lebih kompleks dari latihan</li>
-                        <li>Tekanan dari peserta lain yang terlihat lebih cepat</li>
-                        <li>Bug yang muncul di menit-menit terakhir</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">🌟 Pelajaran Berharga</h4>
-                    <p class="mb-4">Yang saya pelajari dari pengalaman ini:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Persiapan yang matang sangat penting</li>
-                        <li>Tetap tenang dan fokus saat lomba</li>
-                        <li>Jangan membandingkan progress dengan peserta lain</li>
-                        <li>Kualitas code lebih penting dari kecepatan</li>
-                        <li>Networking dengan peserta lain juga berharga</li>
-                    </ul>
-
-                    <div class="bg-green-50 p-4 rounded-lg mt-6">
-                        <p class="text-green-800"><strong>🚀 Tips untuk Adik-adik:</strong> Jangan takut untuk ikut lomba! Bahkan jika tidak menang, pengalaman yang didapat sangat berharga untuk pengembangan skill dan mental.</p>
-                    </div>
-                `
-            },
-            'javascript-frameworks': {
-                title: 'Framework JavaScript yang Wajib Dipelajari',
-                date: '5 November 2023',
-                image: `<svg class="w-full h-full object-cover" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100%" height="100%" fill="#f59e0b"/>
-                    <circle cx="120" cy="80" r="25" fill="#3b82f6" opacity="0.8"/>
-                    <text x="120" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">React</text>
-                    <circle cx="200" cy="80" r="25" fill="#10b981" opacity="0.8"/>
-                    <text x="200" y="87" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">Vue</text>
-                    <circle cx="280" cy="80" r="25" fill="#ef4444" opacity="0.8"/>
-                    <text x="280" y="87" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">Angular</text>
-                    <text x="200" y="140" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">JS Frameworks</text>
-                    <path d="M50,160 Q200,120 350,160" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.6"/>
-                </svg>`,
-                content: `
-                    <h3 class="text-2xl font-bold mb-4">⚡ Era Framework JavaScript Modern</h3>
-                    <p class="mb-4">Sebagai siswa RPL, memahami framework JavaScript adalah skill yang sangat penting di era modern ini. Mari kita bahas tiga framework utama yang wajib dipelajari.</p>
-                    
-                    <h4 class="text-xl font-semibold mb-3 mt-6 text-blue-600">⚛️ React - The Popular Choice</h4>
-                    <p class="mb-4">React adalah library yang dikembangkan oleh Facebook dan sangat populer di industri:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li><strong>Kelebihan:</strong> Component-based, virtual DOM, ecosystem yang besar</li>
-                        <li><strong>Cocok untuk:</strong> Aplikasi web kompleks, SPA (Single Page Application)</li>
-                        <li><strong>Learning curve:</strong> Moderate, butuh pemahaman JSX</li>
-                        <li><strong>Job market:</strong> Sangat tinggi, banyak perusahaan menggunakan</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6 text-green-600">🟢 Vue.js - The Progressive Framework</h4>
-                    <p class="mb-4">Vue.js dikenal sebagai framework yang mudah dipelajari:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li><strong>Kelebihan:</strong> Mudah dipelajari, dokumentasi excellent, flexible</li>
-                        <li><strong>Cocok untuk:</strong> Pemula, project kecil hingga besar</li>
-                        <li><strong>Learning curve:</strong> Easy, syntax mirip HTML biasa</li>
-                        <li><strong>Job market:</strong> Growing, terutama di Asia</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6 text-red-600">🅰️ Angular - The Full Framework</h4>
-                    <p class="mb-4">Angular adalah full framework yang dikembangkan oleh Google:</p>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li><strong>Kelebihan:</strong> Full-featured, TypeScript built-in, enterprise-ready</li>
-                        <li><strong>Cocok untuk:</strong> Aplikasi enterprise, project besar</li>
-                        <li><strong>Learning curve:</strong> Steep, butuh pemahaman TypeScript</li>
-                        <li><strong>Job market:</strong> Tinggi di perusahaan besar</li>
-                    </ul>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">🎯 Rekomendasi untuk Pemula</h4>
-                    <p class="mb-4">Berdasarkan pengalaman saya belajar ketiga framework ini:</p>
-                    <ol class="list-decimal list-inside mb-4 space-y-2">
-                        <li><strong>Mulai dengan Vue.js</strong> - Paling mudah dipelajari dan dipahami</li>
-                        <li><strong>Lanjut ke React</strong> - Setelah nyaman dengan konsep component</li>
-                        <li><strong>Eksplorasi Angular</strong> - Jika ingin fokus ke enterprise development</li>
-                    </ol>
-
-                    <h4 class="text-xl font-semibold mb-3 mt-6">📚 Tips Belajar Framework</h4>
-                    <ul class="list-disc list-inside mb-4 space-y-2">
-                        <li>Pastikan sudah menguasai JavaScript vanilla dulu</li>
-                        <li>Buat project kecil untuk setiap framework</li>
-                        <li>Ikuti tutorial official documentation</li>
-                        <li>Join komunitas developer untuk diskusi</li>
-                        <li>Praktik dengan membuat clone aplikasi populer</li>
-                    </ul>
-
-                    <div class="bg-yellow-50 p-4 rounded-lg mt-6">
-                        <p class="text-yellow-800"><strong>💡 Pro Tip:</strong> Jangan terburu-buru ingin menguasai semua framework sekaligus. Fokus pada satu framework, kuasai dengan baik, baru pindah ke yang lain!</p>
-                    </div>
-                `
-            }
-        };
-
-        // Blog functions
-        function openBlogPost(postId) {
-            const post = blogPosts[postId];
-            if (!post) return;
-
-            document.getElementById('blogTitle').textContent = post.title;
-            document.getElementById('blogDate').textContent = post.date;
-            document.getElementById('blogImage').innerHTML = post.image;
-            document.getElementById('blogContent').innerHTML = post.content;
-            document.getElementById('blogModal').classList.remove('hidden');
-        }
-
-        function closeBlogPost() {
-            document.getElementById('blogModal').classList.add('hidden');
-        }
-
-        function shareBlog() {
-            const title = document.getElementById('blogTitle').textContent;
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: 'Baca artikel menarik dari Muhammad Azzam Arvanda Saputra',
-                    url: window.location.href
-                });
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                const url = window.location.href;
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('📋 Link artikel berhasil disalin ke clipboard!');
-                });
-            }
-        }
-
-        function likeBlog() {
-            alert('❤️ Terima kasih sudah menyukai artikel ini!');
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('blogModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeBlogPost();
-            }
+        // Initialize with login modal
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('portfolioContent').classList.add('hidden');
+            renderProjectsTable();
         });
-
-        // Initialize page when loaded
-        document.addEventListener('DOMContentLoaded', initializePage);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d3f3c333cefe17',t:'MTc1NzU2MDAxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984784dc126afe03',t:'MTc1ODc3MTgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
